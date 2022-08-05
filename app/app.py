@@ -30,7 +30,7 @@ def guardar_presente(legajo: int, ip: str, db: Session = Depends(get_db)):
         return False
     existe = db.query(models.Presente).filter(models.Presente.legajo == legajo, models.Presente.fecha == datetime.today().date()).first()
     if existe:
-	return False
+        return False
     db_presente = models.Presente(legajo=legajo, fecha=datetime.now())
     db.add(db_presente)
     db.commit()
