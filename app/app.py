@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
 from database import get_db, engine
-from datetime import date
+from datetime import datetime
 from sqlalchemy.orm import Session
 from starlette.middleware.cors import CORSMiddleware
 import models
