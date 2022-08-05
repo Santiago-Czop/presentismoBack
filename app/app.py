@@ -2,13 +2,23 @@ from fastapi import FastAPI, Depends
 from database import get_db, engine
 from datetime import datetime
 from sqlalchemy.orm import Session
+from starlette.middleware.cors import CORSMiddleware
 import models
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-IP_ITBA = "" # TODO Llenar con dato de mamá
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+	allow_headers=["*"],
+    max_age=3600,
+)
+
+IP_ITBA = "1" # TODO Llenar con dato de mamá
 
 @app.get("/")
 def front():
