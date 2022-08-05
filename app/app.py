@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
 from database import get_db, engine
-from datetime import datetime
+from datetime import date
 from sqlalchemy.orm import Session
 from starlette.middleware.cors import CORSMiddleware
 import models
@@ -28,6 +28,9 @@ def front():
 def guardar_presente(legajo: int, ip: str, db: Session = Depends(get_db)):
     if ip != IP_ITBA:
         return False
+    existe = db.query(models.Presente).filter(models.Presente.legajo == legajo, models.Presente.fecha == datetime.today().date()).first()
+    if existe:
+	return False
     db_presente = models.Presente(legajo=legajo, fecha=datetime.now())
     db.add(db_presente)
     db.commit()
