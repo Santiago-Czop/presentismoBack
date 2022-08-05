@@ -18,7 +18,7 @@ app.add_middleware(
     max_age=3600,
 )
 
-IP_ITBA = "1" # TODO Llenar con dato de mamá
+IP_ITBA = "200.5.121.136"
 
 @app.get("/")
 def front():
